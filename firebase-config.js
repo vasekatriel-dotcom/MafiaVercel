@@ -13,13 +13,14 @@
 // ============================================================
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+ apiKey: "AIzaSyD6vb6smfI6w1Z5WejPNZBEXwt_kWzW7m4",
+  authDomain: "mafiavercel.firebaseapp.com",
+  databaseURL: "https://mafiavercel-default-rtdb.firebaseio.com",
+  projectId: "mafiavercel",
+  storageBucket: "mafiavercel.firebasestorage.app",
+  messagingSenderId: "856881061942",
+  appId: "1:856881061942:web:560784301fed4db045b897",
+  measurementId: "G-KN7LJPLKP8"
 };
 
 firebase.initializeApp(firebaseConfig);
