@@ -611,19 +611,37 @@
     }
 
     if(!state.started){
-      return renderNarratorLobby(state, players);
+      renderNarratorLobby(state, players);
+      appendNarratorResetControl();
+      return;
     }
 
     switch(state.phase){
-      case 'night_mafia': return renderNarratorMafia(state, players);
-      case 'night_doctor': return renderNarratorDoctor(state, players);
-      case 'night_detective': return renderNarratorDetective(state, players);
-      case 'night_reveal': return renderNarratorNightReveal(state, players);
-      case 'day_discussion': return renderNarratorDiscussion(state, players);
-      case 'day_vote': return renderNarratorDayVote(state, players);
-      case 'day_reveal': return renderNarratorDayReveal(state, players);
-      default: return renderNarratorLobby(state, players);
+      case 'night_mafia': await renderNarratorMafia(state, players); break;
+      case 'night_doctor': await renderNarratorDoctor(state, players); break;
+      case 'night_detective': await renderNarratorDetective(state, players); break;
+      case 'night_reveal': renderNarratorNightReveal(state, players); break;
+      case 'day_discussion': renderNarratorDiscussion(state, players); break;
+      case 'day_vote': await renderNarratorDayVote(state, players); break;
+      case 'day_reveal': renderNarratorDayReveal(state, players); break;
+      default: renderNarratorLobby(state, players);
     }
+    appendNarratorResetControl();
+  }
+
+  function appendNarratorResetControl(){
+    const div = document.createElement('div');
+    div.style.textAlign = 'center';
+    div.style.marginTop = '4px';
+    div.innerHTML = `<button id="resetGameLink" class="back-link" style="width:auto;">Reset Entire Game</button>`;
+    appEl.appendChild(div);
+    div.querySelector('#resetGameLink').onclick = async ()=>{
+      if(!confirm('Reset the whole game? This clears every player and all progress.')) return;
+      await setPlayers([]);
+      await setRound(defaultRound());
+      await setState(defaultState());
+      runNarrator();
+    };
   }
 
   function narratorHeader(subtitle){
